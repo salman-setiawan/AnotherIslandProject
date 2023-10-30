@@ -4644,13 +4644,14 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.AJAX,
 		C3.Plugins.System.Cnds.IsGroupActive,
 		C3.Plugins.System.Cnds.OnLayoutStart,
+		C3.Plugins.System.Cnds.EveryTick,
 		C3.Plugins.TiledBg.Acts.SetWidth,
 		C3.Plugins.System.Exps.loadingprogress,
 		C3.Plugins.System.Cnds.OnLoadFinished,
 		C3.Plugins.System.Acts.GoToLayout,
+		C3.Plugins.System.Acts.SetVar,
 		C3.Plugins.LocalStorage.Acts.CheckItemExists,
 		C3.Plugins.Sprite.Acts.StopAnim,
-		C3.Plugins.System.Acts.SetVar,
 		C3.Plugins.LocalStorage.Cnds.OnItemExists,
 		C3.Plugins.LocalStorage.Acts.GetItem,
 		C3.Plugins.LocalStorage.Cnds.OnItemGet,
@@ -4658,7 +4659,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Cnds.CompareVar,
 		C3.Plugins.Sprite.Acts.SetAnimFrame,
 		C3.Plugins.System.Cnds.Else,
-		C3.Plugins.System.Cnds.EveryTick,
 		C3.Plugins.Text.Acts.SetText,
 		C3.Plugins.Arr.Acts.JSONLoad,
 		C3.Plugins.Touch.Cnds.OnTapGestureObject,
@@ -4998,15 +4998,15 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => Math.round((f0() * 1920));
 		},
+		() => 1,
+		() => 0,
 		() => "MainMenu",
 		() => "score",
 		() => "saveprogress",
-		() => 1,
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0();
 		},
-		() => 0,
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => v0.GetValue();
@@ -5159,7 +5159,7 @@ self.C3_ExpressionFuncs = [
 		() => 300,
 		() => 1.5,
 		() => "Mini Boss AI",
-		() => 1000,
+		() => 666,
 		() => 15,
 		() => 111,
 		() => "Timer",
@@ -5231,6 +5231,9 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => (f0(3) + 80);
 		},
+		() => -170,
+		() => 570,
+		() => 650,
 		() => "Medium",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -5304,7 +5307,10 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => (f0(3) - 120);
 		},
-		() => 280
+		() => 280,
+		() => 200,
+		() => 420,
+		() => 500
 ];
 
 

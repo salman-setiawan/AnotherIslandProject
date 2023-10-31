@@ -4746,7 +4746,8 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Exps.layoutheight,
 		C3.Plugins.Text.Acts.SetPos,
 		C3.Plugins.System.Exps.viewportwidth,
-		C3.Plugins.System.Exps.viewportheight
+		C3.Plugins.System.Exps.viewportheight,
+		C3.Plugins.Audio.Acts.SetMuted
 	];
 };
 self.C3_JsPropNameTable = [
@@ -4777,7 +4778,7 @@ self.C3_JsPropNameTable = [
 	{SliderBGMCircle: 0},
 	{Description: 0},
 	{TextLabelScore: 0},
-	{TextLoadProgress: 0},
+	{TextDiff: 0},
 	{TextScore: 0},
 	{BExit2: 0},
 	{BPlayAgain: 0},
@@ -4804,6 +4805,10 @@ self.C3_JsPropNameTable = [
 	{EventBrochure: 0},
 	{TextPause: 0},
 	{CreditsText: 0},
+	{brand: 0},
+	{BCasual: 0},
+	{BHell: 0},
+	{BIDiffBack: 0},
 	{Solid: 0},
 	{Border: 0},
 	{BorderGradient: 0},
@@ -4848,6 +4853,11 @@ self.C3_JsPropNameTable = [
 	{TutorLabel: 0},
 	{TutorDesc: 0},
 	{TutorImage: 0},
+	{atmosphere: 0},
+	{HellEnemyCollision: 0},
+	{hellatmo: 0},
+	{MobHell: 0},
+	{BHellPauseContinue: 0},
 	{Mouse: 0},
 	{Keyboard: 0},
 	{Touch: 0},
@@ -4857,7 +4867,6 @@ self.C3_JsPropNameTable = [
 	{Array: 0},
 	{AJAX: 0},
 	{Save: 0},
-	{Sprite: 0},
 	{PlayerHP: 0},
 	{PlayerBar: 0},
 	{HiScore: 0},
@@ -4887,10 +4896,11 @@ self.C3_JsPropNameTable = [
 	{CurrentStep: 0},
 	{TotalStep: 0},
 	{Skipped: 0},
-	{Layer2Interactive: 0},
-	{Layer3Interactive: 0},
-	{Layer4Interactive: 0},
-	{Layer5Interactive: 0},
+	{Layer2: 0},
+	{Layer3: 0},
+	{Layer4: 0},
+	{Layer5: 0},
+	{Layer6: 0},
 	{damage: 0},
 	{enemyUID: 0}
 ];
@@ -5020,8 +5030,10 @@ self.C3_ExpressionFuncs = [
 		() => "min",
 		() => "hour",
 		() => "savegameplay",
+		() => 2,
 		() => 3,
 		() => 100,
+		() => 5,
 		() => 4,
 		() => "https://forms.gle/8bNqmkfBUBX3cKBT7",
 		() => "Options",
@@ -5101,7 +5113,6 @@ self.C3_ExpressionFuncs = [
 		() => -1,
 		() => "Setup",
 		() => "",
-		() => 2,
 		() => "idlesec",
 		p => {
 			const n0 = p._GetNode(0);
@@ -5136,7 +5147,6 @@ self.C3_ExpressionFuncs = [
 		() => 30,
 		() => 20,
 		() => 10,
-		() => 5,
 		() => "Keyboard Settings",
 		() => "Player Movement K",
 		() => "Player Weapon K",
@@ -5310,7 +5320,21 @@ self.C3_ExpressionFuncs = [
 		() => 280,
 		() => 200,
 		() => 420,
-		() => 500
+		() => 500,
+		() => "Hell Setup",
+		() => "Hell Player Condition",
+		() => 99999,
+		() => 6,
+		() => "Hell Keyboard Settings",
+		() => "Player Movement K2",
+		() => "Player Weapon K2",
+		() => "Hell Mob AI",
+		() => "Hell Timer",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => ("er̢̨̠͔̪̂̒r̄:̡:0_͉̜͒r͓ͮ̃͟͞:̙ͪͭ̒̕0̷͙̲̂" + (v0.GetValue()).toString());
+		},
+		() => "Hell UI"
 ];
 
 

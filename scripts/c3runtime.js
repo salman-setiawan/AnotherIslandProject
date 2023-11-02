@@ -4850,6 +4850,7 @@ self.C3_JsPropNameTable = [
 	{hellatmo: 0},
 	{MobHell: 0},
 	{BHellPauseContinue: 0},
+	{MobHellBullet: 0},
 	{Mouse: 0},
 	{Keyboard: 0},
 	{Touch: 0},

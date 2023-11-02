@@ -4642,6 +4642,12 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Browser,
 		C3.Plugins.Arr,
 		C3.Plugins.AJAX,
+		C3.Plugins.Sprite.Acts.SetX,
+		C3.Plugins.Sprite.Exps.X,
+		C3.Plugins.Sprite.Exps.ImagePointX,
+		C3.Plugins.System.Acts.SetVar,
+		C3.Plugins.System.Exps.log10,
+		C3.Plugins.Audio.Acts.SetVolume,
 		C3.Plugins.System.Cnds.IsGroupActive,
 		C3.Plugins.System.Cnds.OnLayoutStart,
 		C3.Plugins.System.Cnds.EveryTick,
@@ -4649,7 +4655,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Exps.loadingprogress,
 		C3.Plugins.System.Cnds.OnLoadFinished,
 		C3.Plugins.System.Acts.GoToLayout,
-		C3.Plugins.System.Acts.SetVar,
 		C3.Plugins.LocalStorage.Acts.CheckItemExists,
 		C3.Plugins.Sprite.Acts.StopAnim,
 		C3.Plugins.LocalStorage.Cnds.OnItemExists,
@@ -4664,24 +4669,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Touch.Cnds.OnTapGestureObject,
 		C3.Plugins.System.Acts.SetLayerOpacity,
 		C3.Plugins.Browser.Acts.GoToURL,
-		C3.Plugins.TiledBg.Acts.SetPos,
-		C3.Plugins.Sprite.Exps.X,
-		C3.Plugins.Sprite.Exps.Y,
-		C3.Plugins.Sprite.Acts.SetPos,
-		C3.Plugins.Sprite.Exps.BBoxLeft,
-		C3.Plugins.Sprite.Exps.Width,
-		C3.Plugins.Sprite.Exps.ImagePointX,
-		C3.Plugins.Touch.Cnds.OnTouchStart,
-		C3.Plugins.Touch.Cnds.IsTouchingObject,
-		C3.Plugins.System.Acts.SetBoolVar,
-		C3.Plugins.System.Cnds.CompareBoolVar,
-		C3.Plugins.Touch.Cnds.IsInTouch,
-		C3.Plugins.Sprite.Acts.SetX,
-		C3.Plugins.Touch.Exps.X,
-		C3.Plugins.Sprite.Exps.BBoxRight,
-		C3.Plugins.System.Exps.log10,
-		C3.Plugins.Audio.Acts.SetVolume,
-		C3.Plugins.Touch.Cnds.OnTouchEnd,
 		C3.Plugins.AJAX.Acts.RequestFile,
 		C3.Plugins.AJAX.Cnds.OnComplete,
 		C3.Plugins.AJAX.Exps.LastData,
@@ -4689,11 +4676,14 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Cnds.Compare,
 		C3.Plugins.System.Acts.AddVar,
 		C3.Plugins.System.Acts.CreateObject,
+		C3.Plugins.Sprite.Exps.Y,
 		C3.Behaviors.Pin.Acts.PinByImagePoint,
 		C3.Plugins.Sprite.Acts.SetY,
 		C3.Plugins.Text.Acts.SetOpacity,
+		C3.Plugins.Audio.Acts.Play,
 		C3.Plugins.Sprite.Acts.SetOpacity,
 		C3.Plugins.Sprite.Acts.SetAnim,
+		C3.Plugins.TiledBg.Acts.SetPos,
 		C3.Plugins.TiledBg.Exps.X,
 		C3.Plugins.TiledBg.Exps.Y,
 		C3.Plugins.Sprite.Acts.SetWidth,
@@ -4716,7 +4706,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Acts.SetMirrored,
 		C3.Plugins.Mouse.Cnds.IsButtonDown,
 		C3.Plugins.Sprite.Acts.Spawn,
-		C3.Plugins.Audio.Acts.Play,
 		C3.Behaviors.Bullet.Acts.SetEnabled,
 		C3.Plugins.Audio.Acts.StopAll,
 		C3.Plugins.Sprite.Exps.UID,
@@ -4742,6 +4731,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Arr.Exps.AsJSON,
 		C3.Plugins.System.Acts.RestartLayout,
 		C3.Plugins.System.Acts.SetLayerScale,
+		C3.Plugins.Sprite.Acts.SetPos,
 		C3.Plugins.System.Exps.layoutwidth,
 		C3.Plugins.System.Exps.layoutheight,
 		C3.Plugins.Text.Acts.SetPos,
@@ -4809,6 +4799,8 @@ self.C3_JsPropNameTable = [
 	{BCasual: 0},
 	{BHell: 0},
 	{BIDiffBack: 0},
+	{BGMCheck: 0},
+	{SFXCheck: 0},
 	{Solid: 0},
 	{Border: 0},
 	{BorderGradient: 0},
@@ -5003,66 +4995,6 @@ function or(l, r)
 }
 
 self.C3_ExpressionFuncs = [
-		() => "LoadingScreen",
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => Math.round((f0() * 1920));
-		},
-		() => 1,
-		() => 0,
-		() => "MainMenu",
-		() => "score",
-		() => "saveprogress",
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0();
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => v0.GetValue();
-		},
-		() => "savescore",
-		() => "health",
-		() => "healthbar",
-		() => "playerx",
-		() => "playery",
-		() => "sec",
-		() => "min",
-		() => "hour",
-		() => "savegameplay",
-		() => 2,
-		() => 3,
-		() => 100,
-		() => 5,
-		() => 4,
-		() => "https://forms.gle/8bNqmkfBUBX3cKBT7",
-		() => "Options",
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject();
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			const n2 = p._GetNode(2);
-			return () => (n0.ExpObject() + (v1.GetValue() * (n2.ExpObject() / 100)));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => (n0.ExpObject() - n1.ExpObject());
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => (Math.round((n0.ExpObject("end") - n1.ExpObject("start"))) / 100);
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			const n1 = p._GetNode(1);
-			const n2 = p._GetNode(2);
-			return () => C3.clamp(f0(), n1.ExpObject(), n2.ExpObject());
-		},
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
@@ -5085,7 +5017,43 @@ self.C3_ExpressionFuncs = [
 			return () => (f0(v1.GetValue()) * 20);
 		},
 		() => "bgm",
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => v0.GetValue();
+		},
 		() => "sfx",
+		() => "LoadingScreen",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => Math.round((f0() * 1920));
+		},
+		() => 1,
+		() => 0,
+		() => "MainMenu",
+		() => "score",
+		() => "saveprogress",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			return () => f0();
+		},
+		() => "savescore",
+		() => "health",
+		() => "healthbar",
+		() => "playerx",
+		() => "playery",
+		() => "sec",
+		() => "min",
+		() => "hour",
+		() => "savegameplay",
+		() => 2,
+		() => 3,
+		() => 100,
+		() => 5,
+		() => 4,
+		() => "https://forms.gle/8bNqmkfBUBX3cKBT7",
+		() => "Options",
+		() => -500,
+		() => -10,
 		() => "Credits",
 		() => "Tutorial",
 		p => {
@@ -5112,6 +5080,10 @@ self.C3_ExpressionFuncs = [
 		},
 		() => -1,
 		() => "Setup",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => n0.ExpObject();
+		},
 		() => "",
 		() => "idlesec",
 		p => {
@@ -5192,6 +5164,7 @@ self.C3_ExpressionFuncs = [
 		() => 1100,
 		() => "Bug",
 		() => "Initiation",
+		() => 6,
 		() => 1.2,
 		() => "Small",
 		() => -180,
@@ -5324,7 +5297,6 @@ self.C3_ExpressionFuncs = [
 		() => "Hell Setup",
 		() => "Hell Player Condition",
 		() => 99999,
-		() => 6,
 		() => "Hell Keyboard Settings",
 		() => "Player Movement K2",
 		() => "Player Weapon K2",

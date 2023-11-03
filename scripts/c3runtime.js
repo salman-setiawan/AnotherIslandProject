@@ -4683,6 +4683,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Audio.Acts.Play,
 		C3.Plugins.Sprite.Acts.SetOpacity,
 		C3.Plugins.Sprite.Acts.SetAnim,
+		C3.Plugins.System.Acts.SetTimescale,
 		C3.Plugins.TiledBg.Acts.SetPos,
 		C3.Plugins.TiledBg.Exps.X,
 		C3.Plugins.TiledBg.Exps.Y,
@@ -4697,7 +4698,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Cnds.TriggerOnce,
 		C3.Plugins.System.Acts.Wait,
 		C3.Plugins.System.Cnds.LayerVisible,
-		C3.Plugins.System.Acts.SetTimescale,
 		C3.Plugins.Keyboard.Cnds.IsKeyDown,
 		C3.Behaviors.EightDir.Acts.SimulateControl,
 		C3.Plugins.Sprite.Acts.SetTowardPosition,
@@ -4801,6 +4801,8 @@ self.C3_JsPropNameTable = [
 	{BIDiffBack: 0},
 	{BGMCheck: 0},
 	{SFXCheck: 0},
+	{BIInstructBack: 0},
+	{instruct: 0},
 	{Solid: 0},
 	{Border: 0},
 	{BorderGradient: 0},
@@ -4865,6 +4867,7 @@ self.C3_JsPropNameTable = [
 	{HiScore: 0},
 	{PlayerPosX: 0},
 	{PlayerPosY: 0},
+	{Intro: 0},
 	{BossAngle: 0},
 	{BossCooldown: 0},
 	{GameProgress: 0},
@@ -5087,6 +5090,7 @@ self.C3_ExpressionFuncs = [
 		},
 		() => "",
 		() => "idlesec",
+		() => 6,
 		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
@@ -5165,7 +5169,6 @@ self.C3_ExpressionFuncs = [
 		() => 1100,
 		() => "Bug",
 		() => "Initiation",
-		() => 6,
 		() => 1.2,
 		() => "Small",
 		() => -180,

@@ -4642,12 +4642,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Browser,
 		C3.Plugins.Arr,
 		C3.Plugins.AJAX,
-		C3.Plugins.Sprite.Acts.SetX,
-		C3.Plugins.Sprite.Exps.X,
-		C3.Plugins.Sprite.Exps.ImagePointX,
-		C3.Plugins.System.Acts.SetVar,
-		C3.Plugins.System.Exps.log10,
-		C3.Plugins.Audio.Acts.SetVolume,
 		C3.Plugins.System.Cnds.IsGroupActive,
 		C3.Plugins.System.Cnds.OnLayoutStart,
 		C3.Plugins.System.Cnds.EveryTick,
@@ -4655,6 +4649,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Exps.loadingprogress,
 		C3.Plugins.System.Cnds.OnLoadFinished,
 		C3.Plugins.System.Acts.GoToLayout,
+		C3.Plugins.System.Acts.SetVar,
 		C3.Plugins.LocalStorage.Acts.CheckItemExists,
 		C3.Plugins.Sprite.Acts.StopAnim,
 		C3.Plugins.LocalStorage.Cnds.OnItemExists,
@@ -4669,25 +4664,22 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Touch.Cnds.OnTapGestureObject,
 		C3.Plugins.System.Acts.SetLayerOpacity,
 		C3.Plugins.Browser.Acts.GoToURL,
-		C3.Plugins.AJAX.Acts.RequestFile,
-		C3.Plugins.AJAX.Cnds.OnComplete,
-		C3.Plugins.AJAX.Exps.LastData,
-		C3.Plugins.Arr.Exps.At,
-		C3.Plugins.System.Cnds.Compare,
-		C3.Plugins.System.Acts.AddVar,
+		C3.Plugins.Audio.Acts.SetVolume,
 		C3.Plugins.System.Acts.CreateObject,
+		C3.Plugins.Sprite.Exps.X,
 		C3.Plugins.Sprite.Exps.Y,
 		C3.Behaviors.Pin.Acts.PinByImagePoint,
+		C3.Plugins.Sprite.Acts.SetX,
 		C3.Plugins.Sprite.Acts.SetY,
 		C3.Plugins.Text.Acts.SetOpacity,
 		C3.Plugins.Audio.Acts.Play,
 		C3.Plugins.Sprite.Acts.SetOpacity,
 		C3.Plugins.Sprite.Acts.SetAnim,
 		C3.Plugins.System.Acts.SetTimescale,
+		C3.Plugins.Sprite.Acts.SetWidth,
 		C3.Plugins.TiledBg.Acts.SetPos,
 		C3.Plugins.TiledBg.Exps.X,
 		C3.Plugins.TiledBg.Exps.Y,
-		C3.Plugins.Sprite.Acts.SetWidth,
 		C3.Plugins.Sprite.Cnds.IsOverlapping,
 		C3.Plugins.System.Cnds.Every,
 		C3.Plugins.System.Acts.SubVar,
@@ -4703,6 +4695,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Acts.SetTowardPosition,
 		C3.Plugins.Mouse.Exps.X,
 		C3.Plugins.Mouse.Exps.Y,
+		C3.Plugins.System.Cnds.Compare,
 		C3.Plugins.Sprite.Acts.SetMirrored,
 		C3.Plugins.Mouse.Cnds.IsButtonDown,
 		C3.Plugins.Sprite.Acts.Spawn,
@@ -4722,6 +4715,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Cnds.PickByUID,
 		C3.Plugins.Sprite.Acts.SubInstanceVar,
 		C3.Plugins.Sprite.Cnds.CompareInstanceVar,
+		C3.Plugins.System.Acts.AddVar,
 		C3.Plugins.Sprite.Cnds.CompareFrame,
 		C3.Behaviors.MoveTo.Acts.Stop,
 		C3.Plugins.System.Cnds.Repeat,
@@ -4803,6 +4797,7 @@ self.C3_JsPropNameTable = [
 	{SFXCheck: 0},
 	{BIInstructBack: 0},
 	{instruct: 0},
+	{BTutorial: 0},
 	{Solid: 0},
 	{Border: 0},
 	{BorderGradient: 0},
@@ -4847,6 +4842,13 @@ self.C3_JsPropNameTable = [
 	{TutorLabel: 0},
 	{TutorDesc: 0},
 	{TutorImage: 0},
+	{DarkBorder: 0},
+	{TutorialTilemap: 0},
+	{BTutorialContinue: 0},
+	{BTutorialOptions: 0},
+	{BITutorBack: 0},
+	{BTutorSave: 0},
+	{TutorialInfo: 0},
 	{atmosphere: 0},
 	{HellEnemyCollision: 0},
 	{hellatmo: 0},
@@ -4879,19 +4881,8 @@ self.C3_JsPropNameTable = [
 	{StrSec: 0},
 	{StrMin: 0},
 	{GameScale: 0},
-	{BGMvarVolume: 0},
-	{BGMsliderValue: 0},
-	{BGMtindex: 0},
-	{BGMsindex: 0},
-	{SliderBGMDragging: 0},
-	{SFXvarVolume: 0},
-	{SFXsliderValue: 0},
-	{SFXtindex: 0},
-	{SFXsindex: 0},
-	{SliderSFXDragging: 0},
 	{CurrentStep: 0},
 	{TotalStep: 0},
-	{Skipped: 0},
 	{Layer2: 0},
 	{Layer3: 0},
 	{Layer4: 0},
@@ -4999,33 +4990,6 @@ function or(l, r)
 }
 
 self.C3_ExpressionFuncs = [
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			const n2 = p._GetNode(2);
-			return () => C3.clamp(n0.ExpObject(), n1.ExpObject("start"), n2.ExpObject("end"));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const n1 = p._GetNode(1);
-			return () => (n0.ExpObject() - n1.ExpObject("start"));
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			const v1 = p._GetNode(1).GetVar();
-			return () => (Math.round((v0.GetValue() / v1.GetValue())) / 100);
-		},
-		p => {
-			const f0 = p._GetNode(0).GetBoundMethod();
-			const v1 = p._GetNode(1).GetVar();
-			return () => (f0(v1.GetValue()) * 20);
-		},
-		() => "bgm",
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => v0.GetValue();
-		},
-		() => "sfx",
 		() => "LoadingScreen",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -5039,6 +5003,10 @@ self.C3_ExpressionFuncs = [
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0();
+		},
+		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => v0.GetValue();
 		},
 		() => "savescore",
 		() => "health",
@@ -5056,33 +5024,11 @@ self.C3_ExpressionFuncs = [
 		() => 4,
 		() => "https://forms.gle/8bNqmkfBUBX3cKBT7",
 		() => "Options",
+		() => "bgm",
 		() => -500,
 		() => -10,
+		() => "sfx",
 		() => "Credits",
-		() => "Tutorial",
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(0, 0);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpObject(1, 0);
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			return () => n0.ExpObject(0, (0 + v1.GetValue()));
-		},
-		p => {
-			const n0 = p._GetNode(0);
-			const v1 = p._GetNode(1).GetVar();
-			return () => n0.ExpObject(1, (0 + v1.GetValue()));
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => (0 + v0.GetValue());
-		},
-		() => -1,
 		() => "Setup",
 		p => {
 			const n0 = p._GetNode(0);
@@ -5092,13 +5038,13 @@ self.C3_ExpressionFuncs = [
 		() => "idlesec",
 		() => 6,
 		p => {
+			const v0 = p._GetNode(0).GetVar();
+			return () => (v0.GetValue() * 20);
+		},
+		p => {
 			const n0 = p._GetNode(0);
 			const n1 = p._GetNode(1);
 			return () => C3.lerp(n0.ExpObject(), n1.ExpObject(), 0.9);
-		},
-		p => {
-			const v0 = p._GetNode(0).GetVar();
-			return () => (v0.GetValue() * 20);
 		},
 		() => "Player Condition",
 		() => 0.8,
@@ -5132,6 +5078,7 @@ self.C3_ExpressionFuncs = [
 			return () => n0.ExpInstVar();
 		},
 		() => "Mob 1 AI",
+		() => 1.5,
 		() => 24,
 		() => "death",
 		() => "Mob 2 AI",
@@ -5144,7 +5091,6 @@ self.C3_ExpressionFuncs = [
 			return () => C3.distanceTo(n0.ExpObject(), n1.ExpObject(), n2.ExpObject(), n3.ExpObject());
 		},
 		() => 300,
-		() => 1.5,
 		() => "Mini Boss AI",
 		() => 666,
 		() => 15,
@@ -5181,7 +5127,6 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => (f0() + 80);
 		},
-		() => -40,
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => (f0() - 60);
@@ -5202,6 +5147,7 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => (f0(3) / 2);
 		},
+		() => -40,
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => (f0(3) - 340);
@@ -5226,7 +5172,6 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => (f0() - 40);
 		},
-		() => 180,
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => (f0() - 180);
@@ -5265,7 +5210,6 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => (f0() - 120);
 		},
-		() => 330,
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => (f0() - 260);
@@ -5278,6 +5222,7 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => (f0() - 560);
 		},
+		() => 180,
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => (f0(3) - 540);
@@ -5310,7 +5255,14 @@ self.C3_ExpressionFuncs = [
 			const v0 = p._GetNode(0).GetVar();
 			return () => ("er̢̨̠͔̪̂̒r̄:̡:0_͉̜͒r͓ͮ̃͟͞:̙ͪͭ̒̕0̷͙̲̂" + (v0.GetValue()).toString());
 		},
-		() => "Hell UI"
+		() => "Hell UI",
+		() => "Tutorial Setup",
+		() => "Player Condition (Tutorial)",
+		() => "Tutorial Keyboard Settings",
+		() => "Player Movement K3",
+		() => "Player Weapon K3",
+		() => "Tutorial Mob AI",
+		() => "Tutorial UI"
 ];
 
 

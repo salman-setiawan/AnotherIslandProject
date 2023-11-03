@@ -4414,6 +4414,22 @@ VALID_AXES.indexOf(str);if(a===-1)throw new Error("invalid axes");map.get(this).
 }
 
 {
+'use strict';{const C3=self.C3;C3.Behaviors.Fade=class FadeBehavior extends C3.SDKBehaviorBase{constructor(opts){super(opts)}Release(){super.Release()}}}{const C3=self.C3;C3.Behaviors.Fade.Type=class FadeType extends C3.SDKBehaviorTypeBase{constructor(behaviorType){super(behaviorType)}Release(){super.Release()}OnCreate(){}}}
+{const C3=self.C3;const C3X=self.C3X;const IBehaviorInstance=self.IBehaviorInstance;const FADE_IN_TIME=0;const WAIT_TIME=1;const FADE_OUT_TIME=2;const DESTROY=3;const ACTIVE_AT_START=4;C3.Behaviors.Fade.Instance=class FadeInstance extends C3.SDKBehaviorInstanceBase{constructor(behInst,properties){super(behInst);this._fadeInTime=0;this._waitTime=0;this._fadeOutTime=0;this._destroy=true;this._activeAtStart=true;this._setMaxOpacity=false;this._stage=0;this._stageTime=C3.New(C3.KahanSum);this._maxOpacity=
+this._inst.GetWorldInfo().GetOpacity()||1;if(properties){this._fadeInTime=properties[FADE_IN_TIME];this._waitTime=properties[WAIT_TIME];this._fadeOutTime=properties[FADE_OUT_TIME];this._destroy=!!properties[DESTROY];this._activeAtStart=!!properties[ACTIVE_AT_START];this._stage=this._activeAtStart?0:3}if(this._activeAtStart)if(this._fadeInTime===0){this._stage=1;if(this._waitTime===0)this._stage=2}else{this._inst.GetWorldInfo().SetOpacity(0);this._runtime.UpdateRender()}this._StartTicking()}Release(){super.Release()}SaveToJson(){return{"fit":this._fadeInTime,
+"wt":this._waitTime,"fot":this._fadeOutTime,"d":this._destroy,"s":this._stage,"st":this._stageTime.Get(),"mo":this._maxOpacity}}LoadFromJson(o){this._fadeInTime=o["fit"];this._waitTime=o["wt"];this._fadeOutTime=o["fot"];this._destroy=o["d"];this._stage=o["s"];this._stageTime.Set(o["st"]);this._maxOpacity=o["mo"];if(this._stage===3)this._StopTicking();else this._StartTicking()}Tick(){const dt=this._runtime.GetDt(this._inst);this._stageTime.Add(dt);const wi=this._inst.GetWorldInfo();if(this._stage===
+0){wi.SetOpacity(this._stageTime.Get()/this._fadeInTime*this._maxOpacity);this._runtime.UpdateRender();if(wi.GetOpacity()>=this._maxOpacity){wi.SetOpacity(this._maxOpacity);this._stage=1;this._stageTime.Reset();this.DispatchScriptEvent("fadeinend");this.Trigger(C3.Behaviors.Fade.Cnds.OnFadeInEnd)}}if(this._stage===1)if(this._stageTime.Get()>=this._waitTime){this._stage=2;this._stageTime.Reset();this.DispatchScriptEvent("waitend");this.Trigger(C3.Behaviors.Fade.Cnds.OnWaitEnd)}if(this._stage===2)if(this._fadeOutTime!==
+0){wi.SetOpacity(this._maxOpacity-this._stageTime.Get()/this._fadeOutTime*this._maxOpacity);this._runtime.UpdateRender();if(wi.GetOpacity()<=0){this._stage=3;this._stageTime.Reset();this.DispatchScriptEvent("fadeoutend");this.Trigger(C3.Behaviors.Fade.Cnds.OnFadeOutEnd);if(this._destroy)this._runtime.DestroyInstance(this._inst)}}else{this._stage=3;this._stageTime.Reset()}if(this._stage===3)this._StopTicking()}_StartFade(){if(!this._activeAtStart&&!this._setMaxOpacity){this._maxOpacity=this._inst.GetWorldInfo().GetOpacity()||
+1;this._setMaxOpacity=true}if(this._stage===3)this.Start()}_RestartFade(){this.Start()}Start(){this._stage=0;this._stageTime.Reset();if(this._fadeInTime===0){this._stage=1;if(this._waitTime===0)this._stage=2}else{this._inst.GetWorldInfo().SetOpacity(0);this._runtime.UpdateRender()}this._StartTicking()}_SetFadeInTime(t){this._fadeInTime=Math.max(t,0)}_GetFadeInTime(){return this._fadeInTime}_SetWaitTime(t){this._waitTime=Math.max(t,0)}_GetWaitTime(){return this._waitTime}_SetFadeOutTime(t){this._fadeOutTime=
+Math.max(t,0)}_GetFadeOutTime(){return this._fadeOutTime}GetPropertyValueByIndex(index){switch(index){case FADE_IN_TIME:return this._GetFadeInTime();case WAIT_TIME:return this._GetWaitTime();case FADE_OUT_TIME:return this._GetFadeOutTime();case DESTROY:return this._destroy}}SetPropertyValueByIndex(index,value){switch(index){case FADE_IN_TIME:this._SetFadeInTime(value);break;case WAIT_TIME:this._SetWaitTime(value);break;case FADE_OUT_TIME:this._SetFadeOutTime(value);break;case DESTROY:this._destroy=
+!!value;break}}GetDebuggerProperties(){const prefix="behaviors.fade";return[{title:"$"+this.GetBehaviorType().GetName(),properties:[{name:prefix+".properties.fade-in-time.name",value:this._GetFadeInTime(),onedit:v=>this._SetFadeInTime(v)},{name:prefix+".properties.wait-time.name",value:this._GetWaitTime(),onedit:v=>this._SetWaitTime(v)},{name:prefix+".properties.fade-out-time.name",value:this._GetFadeOutTime(),onedit:v=>this._SetFadeOutTime(v)},{name:prefix+".debugger.stage",value:[prefix+".debugger."+
+["fade-in","wait","fade-out","done"][this._stage]]}]}]}GetScriptInterfaceClass(){return self.IFadeBehaviorInstance}};const map=new WeakMap;self.IFadeBehaviorInstance=class IFadeBehaviorInstance extends IBehaviorInstance{constructor(){super();map.set(this,IBehaviorInstance._GetInitInst().GetSdkInstance())}startFade(){map.get(this)._StartFade()}restartFade(){map.get(this)._RestartFade()}set fadeInTime(t){C3X.RequireFiniteNumber(t);map.get(this)._SetFadeInTime(t)}get fadeInTime(){return map.get(this)._GetFadeInTime()}set waitTime(t){C3X.RequireFiniteNumber(t);
+map.get(this)._SetWaitTime(t)}get waitTime(){return map.get(this)._GetWaitTime()}set fadeOutTime(t){C3X.RequireFiniteNumber(t);map.get(this)._SetFadeOutTime(t)}get fadeOutTime(){return map.get(this)._GetFadeOutTime()}}}{const C3=self.C3;C3.Behaviors.Fade.Cnds={OnFadeOutEnd(){return true},OnFadeInEnd(){return true},OnWaitEnd(){return true}}}
+{const C3=self.C3;C3.Behaviors.Fade.Acts={StartFade(){this._StartFade()},RestartFade(){this._RestartFade()},SetFadeInTime(t){this._SetFadeInTime(t)},SetWaitTime(t){this._SetWaitTime(t)},SetFadeOutTime(t){this._SetFadeOutTime(t)}}}{const C3=self.C3;C3.Behaviors.Fade.Exps={FadeInTime(){return this._GetFadeInTime()},WaitTime(){return this._GetWaitTime()},FadeOutTime(){return this._GetFadeOutTime()}}};
+
+}
+
+{
 'use strict';{const C3=self.C3;C3.Behaviors.solid=class SolidBehavior extends C3.SDKBehaviorBase{constructor(opts){super(opts)}Release(){super.Release()}}}{const C3=self.C3;C3.Behaviors.solid.Type=class SolidType extends C3.SDKBehaviorTypeBase{constructor(behaviorType){super(behaviorType)}Release(){super.Release()}OnCreate(){}}}
 {const C3=self.C3;const C3X=self.C3X;const IBehaviorInstance=self.IBehaviorInstance;const ENABLE=0;const TAGS=1;const EMPTY_SET=new Set;C3.Behaviors.solid.Instance=class SolidInstance extends C3.SDKBehaviorInstanceBase{constructor(behInst,properties){super(behInst);this.SetEnabled(true);if(properties){this.SetEnabled(properties[ENABLE]);this.SetTags(properties[TAGS])}}Release(){super.Release()}SetEnabled(e){this._inst._SetSolidEnabled(!!e)}IsEnabled(){return this._inst._IsSolidEnabled()}SetTags(tagList){const savedDataMap=
 this._inst.GetSavedDataMap();if(!tagList.trim()){savedDataMap.delete("solidTags");return}let solidTags=savedDataMap.get("solidTags");if(!solidTags){solidTags=new Set;savedDataMap.set("solidTags",solidTags)}solidTags.clear();for(const tag of tagList.split(" "))if(tag)solidTags.add(tag.toLowerCase())}GetTags(){return this._inst.GetSavedDataMap().get("solidTags")||EMPTY_SET}_GetTagsString(){return[...this.GetTags()].join(" ")}SaveToJson(){return{"e":this.IsEnabled()}}LoadFromJson(o){this.SetEnabled(o["e"])}GetPropertyValueByIndex(index){switch(index){case ENABLE:return this.IsEnabled()}}SetPropertyValueByIndex(index,
@@ -4626,6 +4642,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.DragnDrop,
 		C3.Plugins.TiledBg,
 		C3.Plugins.Text,
+		C3.Behaviors.Fade,
 		C3.Behaviors.solid,
 		C3.Behaviors.Bullet,
 		C3.Behaviors.scrollto,
@@ -4649,6 +4666,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Exps.loadingprogress,
 		C3.Plugins.System.Cnds.OnLoadFinished,
 		C3.Plugins.System.Acts.GoToLayout,
+		C3.Plugins.Touch.Cnds.OnTapGestureObject,
 		C3.Plugins.System.Acts.SetVar,
 		C3.Plugins.LocalStorage.Acts.CheckItemExists,
 		C3.Plugins.Sprite.Acts.StopAnim,
@@ -4662,7 +4680,6 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Cnds.Else,
 		C3.Plugins.Text.Acts.SetText,
 		C3.Plugins.Arr.Acts.JSONLoad,
-		C3.Plugins.Touch.Cnds.OnTapGestureObject,
 		C3.Plugins.System.Acts.SetLayerOpacity,
 		C3.Plugins.Browser.Acts.GoToURL,
 		C3.Plugins.Audio.Acts.SetVolume,
@@ -4689,7 +4706,9 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Cnds.IsOutsideLayout,
 		C3.Plugins.Sprite.Cnds.OnAnimFinished,
 		C3.Plugins.System.Cnds.TriggerOnce,
+		C3.Plugins.TiledBg.Acts.SetOpacity,
 		C3.Plugins.System.Acts.Wait,
+		C3.Behaviors.Fade.Acts.StartFade,
 		C3.Plugins.System.Cnds.LayerVisible,
 		C3.Plugins.Keyboard.Cnds.IsKeyDown,
 		C3.Behaviors.EightDir.Acts.SimulateControl,
@@ -4701,7 +4720,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Mouse.Cnds.IsButtonDown,
 		C3.Plugins.Sprite.Acts.Spawn,
 		C3.Behaviors.Bullet.Acts.SetEnabled,
-		C3.Plugins.Audio.Acts.StopAll,
+		C3.Plugins.Audio.Acts.SetMuted,
 		C3.Plugins.Sprite.Exps.UID,
 		C3.Behaviors.Pathfinding.Acts.FindPath,
 		C3.Plugins.System.Cnds.PickRandom,
@@ -4732,7 +4751,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Text.Acts.SetPos,
 		C3.Plugins.System.Exps.viewportwidth,
 		C3.Plugins.System.Exps.viewportheight,
-		C3.Plugins.Audio.Acts.SetMuted
+		C3.Plugins.Audio.Acts.StopAll
 	];
 };
 self.C3_JsPropNameTable = [
@@ -4799,6 +4818,8 @@ self.C3_JsPropNameTable = [
 	{BIInstructBack: 0},
 	{instruct: 0},
 	{BTutorial: 0},
+	{Fade: 0},
+	{IntroBG: 0},
 	{Solid: 0},
 	{Border: 0},
 	{BorderGradient: 0},
@@ -4838,8 +4859,8 @@ self.C3_JsPropNameTable = [
 	{Enemy3Collision: 0},
 	{MobMiniBoss: 0},
 	{BossBullet: 0},
-	{Lightning: 0},
 	{Mob3Bullet: 0},
+	{Lightning: 0},
 	{TutorLabel: 0},
 	{TutorDesc: 0},
 	{TutorImage: 0},
@@ -5057,22 +5078,6 @@ self.C3_ExpressionFuncs = [
 		() => 80,
 		() => 0.1,
 		() => 0.3,
-		() => 95,
-		() => 0.05,
-		() => 90,
-		() => 85,
-		() => 75,
-		() => 70,
-		() => 65,
-		() => 60,
-		() => 55,
-		() => 50,
-		() => 45,
-		() => 40,
-		() => 35,
-		() => 30,
-		() => 20,
-		() => 10,
 		() => "Keyboard Settings",
 		() => "Player Movement K",
 		() => "Player Weapon K",
@@ -5093,12 +5098,17 @@ self.C3_ExpressionFuncs = [
 			const n3 = p._GetNode(3);
 			return () => C3.distanceTo(n0.ExpObject(), n1.ExpObject(), n2.ExpObject(), n3.ExpObject());
 		},
-		() => 300,
+		() => 400,
+		() => 0.6,
+		() => 30,
 		() => "Mini Boss AI",
+		() => 10,
+		() => 45,
 		() => 666,
 		() => 15,
 		() => 111,
 		() => "Timer",
+		() => 60,
 		() => "0",
 		p => {
 			const v0 = p._GetNode(0).GetVar();
@@ -5171,6 +5181,7 @@ self.C3_ExpressionFuncs = [
 		() => 570,
 		() => 650,
 		() => "Medium",
+		() => 40,
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => (f0() - 40);
@@ -5200,6 +5211,7 @@ self.C3_ExpressionFuncs = [
 			return () => (f0(3) - 180);
 		},
 		() => 140,
+		() => 50,
 		() => 520,
 		() => 600,
 		() => "Large",
@@ -5261,6 +5273,7 @@ self.C3_ExpressionFuncs = [
 		() => "Hell UI",
 		() => "Tutorial Setup",
 		() => "Player Condition (Tutorial)",
+		() => 0.05,
 		() => "Tutorial Keyboard Settings",
 		() => "Player Movement K3",
 		() => "Player Weapon K3",

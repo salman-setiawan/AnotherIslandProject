@@ -4652,11 +4652,12 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.System.Acts.SetVar,
 		C3.Plugins.LocalStorage.Acts.CheckItemExists,
 		C3.Plugins.Sprite.Acts.StopAnim,
+		C3.Plugins.System.Cnds.CompareVar,
+		C3.Plugins.Audio.Acts.Stop,
 		C3.Plugins.LocalStorage.Cnds.OnItemExists,
 		C3.Plugins.LocalStorage.Acts.GetItem,
 		C3.Plugins.LocalStorage.Cnds.OnItemGet,
 		C3.Plugins.LocalStorage.Exps.ItemValue,
-		C3.Plugins.System.Cnds.CompareVar,
 		C3.Plugins.Sprite.Acts.SetAnimFrame,
 		C3.Plugins.System.Cnds.Else,
 		C3.Plugins.Text.Acts.SetText,
@@ -4888,6 +4889,7 @@ self.C3_JsPropNameTable = [
 	{Layer4: 0},
 	{Layer5: 0},
 	{Layer6: 0},
+	{GameAudio: 0},
 	{damage: 0},
 	{enemyUID: 0}
 ];
@@ -5000,6 +5002,7 @@ self.C3_ExpressionFuncs = [
 		() => "MainMenu",
 		() => "score",
 		() => "saveprogress",
+		() => "bgm",
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0();
@@ -5024,10 +5027,10 @@ self.C3_ExpressionFuncs = [
 		() => 4,
 		() => "https://forms.gle/8bNqmkfBUBX3cKBT7",
 		() => "Options",
-		() => "bgm",
 		() => -500,
-		() => -10,
+		() => -5,
 		() => "sfx",
+		() => -10,
 		() => "Credits",
 		() => "Setup",
 		p => {
